@@ -1,28 +1,79 @@
-html, body
-{
+* { box-sizing: border-box; }
+
+html, body {
   background-color: #fff;
-  color: #000;
+  color: #2e2f30;
   letter-spacing: 0.5px;
   font-family: "Source Sans Pro", Arial, sans-serif;
   height: 100vh;
   margin: 0;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
-footer
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s
+}
+.page-enter, .page-leave-active
 {
-  padding: 20px;
+  opacity: 0
+}
+
+a, a:hover, a:focus, a:visited {
+  color: #4ECD00;
+  text-decoration: none;
+}
+
+
+/***** custom *****/
+.text-center {
   text-align: center;
-  border-top: 1px solid #ddd;
+}
+.text-right {
+  text-align: right;
+}
+.font-color-transparent > label {
+  color: transparent !important;
+}
+.main-title {
+  border-bottom: solid 2px #4ECD00;
+  padding-bottom: 6px;
+}
+.checkbox-before-texbox {
+  float: left;
+  line-height: 30px;
+}
+.create-button {
+  float: right;
+  margin-top: 20px !important;
+}
+.table-footer {
+  border: 1px solid #dfe6ec;
+  border-top: none;
+  padding: 5px;
 }
 
-a, a:hover, a:focus, a:visited
-{
-  color: #000;
+
+
+/** nev menu **/
+.nav-header {
+  background-color: #DF0E70;
+  height: 40px;
+  margin: 0;
+  text-align: center;
+  line-height: 40px;
+}
+.nav-header--text {
+  font-size: 18px;
+  margin: 0 auto;
+  font-weight: normal;
+  color: #fff;
+  white-space: nowrap;
+}
+.el-menu-item, .el-submenu__title {
+  text-transform: uppercase;
+}
+.el-menu-item.menu-2line {
+  line-height: 18px;
+  padding-top: 10px;
 }
 
-.logo {
-  width: 100%;
-  height: auto;
-  max-width: 400px;
-  max-height: 289px;
-}
