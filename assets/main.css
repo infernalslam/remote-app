@@ -1,0 +1,132 @@
+* { box-sizing: border-box; }
+
+html, body {
+  background-color: #fff;
+  color: #2e2f30;
+  letter-spacing: 0.5px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  height: 100vh;
+  margin: 0;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s
+}
+.page-enter, .page-leave-active
+{
+  opacity: 0
+}
+
+a, a:hover, a:focus, a:visited {
+  color: #4ECD00;
+  text-decoration: none;
+}
+
+/*** will delete soon***/
+.input-wrong {
+  border: 1px solid #ff0000;
+  border-radius: 3px;
+}
+.unused {
+  display: none;
+}
+
+/***** custom *****/
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.font-color-transparent > label {
+  color: transparent !important;
+}
+.main-title {
+  border-bottom: solid 2px #4ECD00;
+  padding-bottom: 6px;
+}
+.checkbox-before-texbox {
+  float: left;
+  line-height: 30px;
+}
+.create-button {
+  float: right;
+  margin-top: 20px !important;
+}
+.table-footer {
+  border: 1px solid #dfe6ec;
+  border-top: none;
+  padding: 5px;
+}
+
+
+/******* el *******/
+.el-menu-item.is-active {
+  color: #4ECD00 !important;
+  font-weight: 500;
+}
+.el-form .readonly input,
+.el-form .readonly textarea,
+.el-form .readonly div {
+  background-color: #eee !important;
+}
+.el-form .el-input:not(.el-input-group), .el-form .before-mixed-input {
+  display: -moz-box !important;
+  display: -webkit-box !important;
+  display: box !important;
+  display: -ms-flexbox !important;
+  width: auto !important;
+  line-height: normal;
+}
+.el-form .el-select {
+  display: block !important;
+}
+.el-form--label-left .el-input:not(.el-input-group) {
+  margin-top: 4px !important;
+}
+.el-form--label-top .el-form-item__label {
+  padding-bottom: 4px !important;
+}
+.el-form .before-upload, .font-color-transparent > .el-form-item__content {
+  line-height: normal;
+}
+.el-radio__input, .el-radio__input > span,
+.el-checkbox__input, .el-checkbox__input > span {
+  margin: 0px !important;
+}
+.filterList .el-form-item__label {
+  font-size: 13px !important;
+}
+.el-form-item.no-margin-bottom {
+  margin-bottom: 0px;
+}
+.el-dialog__header {
+  text-transform: uppercase;
+}
+.el-tag {
+  text-transform: capitalize;
+}
+
+/** nev menu **/
+.nav-header {
+  background-color: #4ECD00;
+  height: 40px;
+  margin: 0;
+  text-align: center;
+  line-height: 40px;
+}
+.nav-header--text {
+  font-size: 18px;
+  margin: 0 auto;
+  font-weight: normal;
+  color: #fff;
+  white-space: nowrap;
+}
+.el-menu-item, .el-submenu__title {
+  text-transform: uppercase;
+}
+.el-menu-item.menu-2line {
+  line-height: 18px;
+  padding-top: 10px;
+}
