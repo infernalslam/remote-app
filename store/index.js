@@ -4,7 +4,7 @@ import axios from 'axios'
 const store = () => {
   return new Vuex.Store({
     state: {
-      query: ''
+      data: ''
     },
     getters: {
       query: state => state.query
@@ -16,7 +16,10 @@ const store = () => {
     },
     mutations: {
       querySearch (state, payload) {
-        state.query = payload
+        axios.get(`http://localhost:3001/api/youtube?query=${payload}`).then((res) => {
+          state.data = res.data.items
+          console.log(res.data)
+        })
       }
     }
   })

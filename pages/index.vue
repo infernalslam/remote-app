@@ -3,7 +3,7 @@
   Hello Client! <br>
   <input type="text" v-model="text">
   <button @click="search()"> submit </button> <br>
-  คำที่ค้นหา : {{ query }}
+  คำที่ค้นหา : {{ text }}
 </div>
 </template>
 

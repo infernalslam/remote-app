@@ -8,7 +8,7 @@ app.all('/*', function (req, res, next) {
 })
 
 app.get('/api/youtube', function (req, res) {
-  res.send('Hello World!')
+  res.send({query: req.query.query})
 })
 
 app.listen(3001, function () {
