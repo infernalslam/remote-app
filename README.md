@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-# nuxt-express
-=======
 # remote-app
->>>>>>> a59af81f18368935519c18a32fa9d796b89a37a2
+
 
 > Nuxt.js project
 
