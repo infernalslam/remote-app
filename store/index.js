@@ -7,7 +7,7 @@ const store = () => {
       data: ''
     },
     getters: {
-      query: state => state.query
+      data: state => state.data
     },
     actions: {
       querySearch (context, payload) {

@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const YouTube = require('youtube-node')
+const youTube = new YouTube()
+youTube.setKey('AIzaSyDvwXUsN2hDGHCvrUeclxFFffgGLlGv8OE')
 
 app.all('/*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
@@ -8,7 +11,12 @@ app.all('/*', function (req, res, next) {
 })
 
 app.get('/api/youtube', function (req, res) {
-  res.send({query: req.query.query})
+  youTube.search(req.query.query, 50, (error, result) => {
+    if (result) {
+      res.send(JSON.stringify(result, null, 20))
+    } else res.status(500).send(error)
+  })
+  // res.send({query: req.query.query})
 })
 
 app.listen(3001, function () {
