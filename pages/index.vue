@@ -1,48 +1,60 @@
 <template>
-  <section class="container">
-    <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      USERS
-    </h1>
-    <ul class="users">
-      <li v-for="(user, index) in users" :key="index" class="user">
-        <nuxt-link :to="{ name: 'id', params: { id: index }}">
-          {{ user.name }}
-        </nuxt-link>
-      </li>
-    </ul>
-  </section>
+<div>
+  Welcome vuejs : Clinet <br>
+  <input type="text" v-model="text">
+  <button @click="search()"> submit </button> <br>
+  คำที่ค้นหา : {{ text }} <br>
+    <div v-for="src in items" :key="src.id.videoId">
+       ชื่อเรื่อง  {{ src.snippet.title }} <br>
+       รหัสวิดิโอ  {{ src.id.videoId }} <br>
+       <img :src="src.snippet.thumbnails.high.url">
+       <hr>
+    </div>
+</div>
 </template>
 
 <script>
-import axios from '~/plugins/axios'
-
+// import axios from '~/plugins/axios'
+import { mapActions, mapGetters } from 'vuex'
+import io from 'socket.io-client'
+// io('http://localhost')
+// io.connect()
+// const socket = io()
+// console.log(socket)
+// import io from 'socket.io'
+// const socket = io()
+// console.log(socket)
 export default {
   async asyncData () {
-    let { data } = await axios.get('/api/users')
-    return { users: data }
+    // let { data } = await axios.get('/api/users')
+    // return { users: data }
   },
   head () {
     return {
-      title: 'Users'
+      title: 'Clinet'
     }
+  },
+  async mounted () {
+    const socket = await io()
+    console.log(socket)
+  },
+  data () {
+    return {
+      text: ''
+    }
+  },
+  methods: {
+    search () {
+      this.searchQuery(this.text)
+    },
+    ...mapActions({
+      searchQuery: 'search'
+    })
+  },
+  computed: {
+    ...mapGetters({
+      items: 'data'
+    })
   }
 }
 </script>
-
-<style scoped>
-.title
-{
-  margin: 30px 0;
-}
-.users
-{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.user
-{
-  margin: 10px 0;
-}
-</style>
