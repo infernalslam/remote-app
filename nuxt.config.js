@@ -22,6 +22,9 @@ module.exports = {
   */
   build: {
     vendor: ['axios'],
+    plugins: [
+      // { src: '~plugins/socket.io-client.js' }
+    ],
     /*
     ** Run ESLINT on save
     */

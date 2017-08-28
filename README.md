@@ -1,5 +1,6 @@
 # remote-app
 
+
 > Nuxt.js project
 
 ## Build Setup
