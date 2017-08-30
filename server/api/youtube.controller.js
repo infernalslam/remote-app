@@ -1,8 +1,4 @@
 import { Router } from 'express'
-
-// var http = require('http').Server(Router)
-// var io = require('socket.io')(http)
-
 const YouTube = require('youtube-node')
 const youTube = new YouTube()
 youTube.setKey('AIzaSyDvwXUsN2hDGHCvrUeclxFFffgGLlGv8OE')
@@ -19,10 +15,5 @@ router.get('/query', function (req, res) {
     }
   })
 })
-
-// socket.io
-// io.on('connection', (socket) => {
-//   console.log('a user connected')
-// })
 
 export default router
