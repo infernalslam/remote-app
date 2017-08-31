@@ -1,5 +1,8 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
+const YouTube = require('youtube-node')
+const youTube = new YouTube()
+youTube.setKey('AIzaSyDvwXUsN2hDGHCvrUeclxFFffgGLlGv8OE')
 
 // import api from './api'
 
@@ -19,6 +22,25 @@ app.all('/*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'X-Requested-With')
   next()
+})
+
+app.get('/api/youTube/query', function (req, res) {
+  youTube.search(req.query.query, 50, (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(JSON.stringify(result, null, 20))
+    }
+  })
+})
+
+// test api
+let data = []
+let count = 1
+app.get('/api/data', (req, res) => {
+  let text = { count: count++ }
+  data.push(text)
+  res.send(data)
 })
 
 // socket.io
