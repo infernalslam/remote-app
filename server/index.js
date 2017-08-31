@@ -39,9 +39,13 @@ app.get('/api/query', (req, res) => {
   })
 })
 
+app.get(`/api/playlist`, (req, res) => {
+  res.send(playlist)
+})
+
 app.post('/api/post', (req, res) => {
-  console.log(req.body)
-  res.send('okja')
+  playlist.push(req.body)
+  res.send(playlist)
 })
 
 // socket.io
@@ -50,7 +54,15 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected : ' + socket.id)
   })
+  socket.on('post_youtube', (data) => {
+    console.log('user data : ' + data)
+    socket.broadcast.emit('post_youtube', data)
+  })
 })
+
+// socket.on('post_event_youtube', (data) => {
+//   console.log('this word --> ', data)
+// })
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
