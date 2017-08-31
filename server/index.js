@@ -3,10 +3,13 @@ import { Nuxt, Builder } from 'nuxt'
 const YouTube = require('youtube-node')
 const youTube = new YouTube()
 youTube.setKey('AIzaSyDvwXUsN2hDGHCvrUeclxFFffgGLlGv8OE')
+const bodyParser = require('body-parser')
 
 // import api from './api'
 
 const app = express()
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 // const io = require('socket.io-client')('http://localhost')
@@ -24,7 +27,9 @@ app.all('/*', function (req, res, next) {
   next()
 })
 
-app.get('/api/youTube/query', function (req, res) {
+let playlist = []
+
+app.get('/api/query', (req, res) => {
   youTube.search(req.query.query, 50, (err, result) => {
     if (err) {
       console.log(err)
@@ -34,13 +39,9 @@ app.get('/api/youTube/query', function (req, res) {
   })
 })
 
-// test api
-let data = []
-let count = 1
-app.get('/api/data', (req, res) => {
-  let text = { count: count++ }
-  data.push(text)
-  res.send(data)
+app.post('/api/post', (req, res) => {
+  console.log(req.body)
+  res.send('okja')
 })
 
 // socket.io
