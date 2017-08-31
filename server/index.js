@@ -1,9 +1,15 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
+const YouTube = require('youtube-node')
+const youTube = new YouTube()
+youTube.setKey('AIzaSyDvwXUsN2hDGHCvrUeclxFFffgGLlGv8OE')
+const bodyParser = require('body-parser')
 
 // import api from './api'
 
 const app = express()
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 // const io = require('socket.io-client')('http://localhost')
@@ -21,13 +27,42 @@ app.all('/*', function (req, res, next) {
   next()
 })
 
+let playlist = []
+
+app.get('/api/query', (req, res) => {
+  youTube.search(req.query.query, 50, (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(JSON.stringify(result, null, 20))
+    }
+  })
+})
+
+app.get(`/api/playlist`, (req, res) => {
+  res.send(playlist)
+})
+
+app.post('/api/post', (req, res) => {
+  playlist.push(req.body)
+  res.send(playlist)
+})
+
 // socket.io
 io.on('connection', (socket) => {
   console.log('a user connected : ' + socket.id)
   socket.on('disconnect', () => {
     console.log('user disconnected : ' + socket.id)
   })
+  socket.on('post_youtube', (data) => {
+    console.log('user data : ' + data)
+    socket.broadcast.emit('post_youtube', data)
+  })
 })
+
+// socket.on('post_event_youtube', (data) => {
+//   console.log('this word --> ', data)
+// })
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')

@@ -7,7 +7,7 @@
     <div v-for="src in items" :key="src.id.videoId">
        ชื่อเรื่อง  {{ src.snippet.title }} <br>
        รหัสวิดิโอ  {{ src.id.videoId }} <br>
-       <img :src="src.snippet.thumbnails.high.url">
+       <img :src="src.snippet.thumbnails.high.url" @click="post(src)">
        <hr>
     </div>
 </div>
@@ -19,7 +19,7 @@ import { mapActions, mapGetters } from 'vuex'
 import io from 'socket.io-client'
 // io('http://localhost')
 // io.connect()
-// const socket = io()
+const socket = io()
 // console.log(socket)
 // import io from 'socket.io'
 // const socket = io()
@@ -35,8 +35,10 @@ export default {
     }
   },
   async mounted () {
-    const socket = await io()
-    console.log(socket)
+    // const socket = await io()
+    // console.log(socket)
+    // socket.on('post_event_youtube', (data) => {
+    // })
   },
   data () {
     return {
@@ -47,13 +49,23 @@ export default {
     search () {
       this.searchQuery(this.text)
     },
+    post (src) {
+      // this.submitForm({ id: src.id.videoId, title: src.snippet.title, img: src.snippet.thumbnails.high.url })
+      // socket.on('post_youtube', (data) => {
+      //   console.log(data)
+      // })
+      socket.emit('post_youtube', { id: src.id.videoId, title: src.snippet.title, img: src.snippet.thumbnails.high.url })
+      // socket.emit('post_youtube', { id: src.id.videoId, title: src.snippet.title, img: src.snippet.thumbnails.high.url })
+    },
     ...mapActions({
-      searchQuery: 'search'
+      searchQuery: 'search',
+      submitForm: 'postClip'
     })
   },
   computed: {
     ...mapGetters({
-      items: 'data'
+      items: 'data',
+      playlist: 'playlist'
     })
   }
 }
